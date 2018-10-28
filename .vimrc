@@ -25,9 +25,6 @@ set hlsearch
 " gvim options
 set guioptions-=T " Hides toolbar
 
-" Load other Vim scripts 
-source ~/.functions.vim
-
 " Custom shortcuts
 map <C-n> :NERDTreeToggle<CR>
 

@@ -26,9 +26,6 @@ set backspace=indent,eol,start " Make backspace behave like normal
 " gvim options
 set guioptions-=T " Hides toolbar
 
-" Load other Vim scripts 
-source ~/.functions.vim
-
 " Custom shortcuts
 map <C-n> :NERDTreeToggle<CR>
 

@@ -20,16 +20,22 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle' " Toggles relative numbering in insert mode
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree' " File manager in sidebar
 Plug 'majutsushi/tagbar'
-Plug 'justinmk/vim-sneak' " Use s + 2 chars as a better f/F
 Plug 'tpope/vim-fugitive'
 Plug 'tmhedberg/SimpylFold' " Python code folding
 Plug 'ntpeters/vim-better-whitespace' " Highlight trailing spaces
 Plug 'vim-airline/vim-airline' " Airline status bar
+Plug 'vim-airline/vim-airline-themes' " Collection of Airline themes
+Plug 'sjl/vitality.vim' " Tmux + iTerm2 handling
+Plug 'tpope/vim-commentary' " Commenting (binding: gcc)
+Plug 'tpope/vim-surround' " Surround (binding: gs)
+Plug 'w0rp/ale' " Async linter
+Plug 'airblade/vim-gitgutter' " Git diff in gutter
+Plug 'SirVer/ultisnips' " Snippets
+Plug 'honza/vim-snippets' " Default snippets
 
 " Vim color schemes
-Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
 
 call plug#end()
@@ -42,8 +48,16 @@ set backspace=indent,eol,start " Make backspace behave like normal
 set incsearch
 set hlsearch
 set colorcolumn=80 " Marker at 80 cols
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/* " Ignore VCS directories
 set encoding=utf-8
+set autoread
+set wildmenu
+set wildmode=longest:full,full
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/* " Ignore VCS directories
+set showcmd
+
+" Color scheme
+let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
 set background=dark
 
 " GVim options
@@ -54,37 +68,31 @@ set guioptions-=r " Hide right scrollbar
 
 "" Platform-dependent GUI options
 if has("gui_running")
-  let g:gruvbox_contrast_dark='hard'
-  colorscheme gruvbox
-
-  " Gvim
   if has("gui_gtk2") || has("gui_gtk3")
     " Linux GUI
     set guifont=Fira\ Mono\ for\ Powerline\ 12,DejaVu\ Sans\ Mono\ 11
   elseif has("gui_macvim")
     " MacVim
-    set guifont=Fira\ Mono\ for\ Powerline:h15,Menlo\ Regular:h12
+    set guifont=Fira\ Mono\ for\ Powerline\ 12,Menlo\ Regular:h12
   elseif has("gui_win32")
     " Win32/64 GVim
   endif
 else
-  " Set different color scheme in terminal
-  colorscheme dracula
+  " Autoload buffer on focus
+  au FocusGained,BufEnter * :silent! !
+
+  " Autosave buffer on focus lost
+  au FocusLost,WinLeave * :silent! wa
 endif
 
 " Load other Vim scripts
 source ~/.functions.vim
 
-" Airline config
-let g:airline_powerline_fonts = 1
-if has("gui_running")
-  let g:airline_theme='gruvbox'
-else
-  let g:airline_theme='dracula'
-endif
+" Language indent options
+autocmd FileType javascript,html,css,yaml setlocal ts=2 sts=2 sw=2 expandtab
 
-" Custom shortcuts
-map <C-n> :NERDTreeToggle<CR>
+" Jenkinsfile detection
+autocmd BufRead,BufNewFile Jenkinsfile set syntax=groovy
 
 " Remaps
 " Disable Arrow keys in Escape mode
@@ -102,9 +110,38 @@ imap <right> <nop>
 " Map Enter to clear highlight in normal mode
 nnoremap <CR> :noh<CR><CR>
 
+" Cscope setup
+if has('cscope')
+  set csverb
+
+  " Cscope mappings
+  nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+  nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+  nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-_>a :cs find a <C-R>=expand("<cword>")<CR><CR>
+endif
+
+" Tmux cursor switching (normal vs. insert mode)
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" Airline config
+let g:airline_powerline_fonts = 1
+let g:airline_theme='gruvbox'
+
+" Custom shortcuts
+map <C-n> :NERDTreeToggle<CR>
+
 " Tagbar key
 nmap <F7> :TagbarToggle<CR>
-
-" Language indent options
-autocmd FileType javascript,html,css,yaml setlocal ts=2 sts=2 sw=2 expandtab
 

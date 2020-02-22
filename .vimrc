@@ -17,23 +17,16 @@ call plug#begin('~/.vim/plugged')
 
 " Plugins
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jeffkreeftmeijer/vim-numbertoggle' " Toggles relative numbering in insert mode
-Plug 'scrooloose/nerdtree' " File manager in sidebar
-Plug 'majutsushi/tagbar'
+" Plug 'jeffkreeftmeijer/vim-numbertoggle' " Toggles relative numbering in insert mode
 Plug 'tpope/vim-fugitive'
-Plug 'tmhedberg/SimpylFold' " Python code folding
 Plug 'ntpeters/vim-better-whitespace' " Highlight trailing spaces
 Plug 'vim-airline/vim-airline' " Airline status bar
 Plug 'vim-airline/vim-airline-themes' " Collection of Airline themes
-Plug 'sjl/vitality.vim' " Tmux + iTerm2 handling
 Plug 'tpope/vim-commentary' " Commenting (binding: gcc)
 Plug 'tpope/vim-surround' " Surround (binding: gs)
-Plug 'w0rp/ale' " Async linter
 Plug 'airblade/vim-gitgutter' " Git diff in gutter
-Plug 'SirVer/ultisnips' " Snippets
-Plug 'honza/vim-snippets' " Default snippets
+Plug 'rust-lang/rust.vim'
 
 " Vim color schemes
 Plug 'morhetz/gruvbox'
@@ -42,7 +35,8 @@ call plug#end()
 
 " Vim options
 set tabstop=4 shiftwidth=4 expandtab " Tab = 4 spaces
-set number relativenumber " Display line numbers
+" set number relativenumber " Display line numbers
+set number " Display line numbers
 syntax enable " Enable syntax highlighting
 set backspace=indent,eol,start " Make backspace behave like normal
 set incsearch
@@ -84,9 +78,6 @@ else
   " Autosave buffer on focus lost
   au FocusLost,WinLeave * :silent! wa
 endif
-
-" Load other Vim scripts
-source ~/.functions.vim
 
 " Language indent options
 autocmd FileType javascript,html,css,yaml setlocal ts=2 sts=2 sw=2 expandtab
@@ -144,4 +135,3 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Tagbar key
 nmap <F7> :TagbarToggle<CR>
-

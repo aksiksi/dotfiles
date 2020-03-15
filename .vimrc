@@ -27,6 +27,7 @@ Plug 'tpope/vim-commentary' " Commenting (binding: gcc)
 Plug 'tpope/vim-surround' " Surround (binding: gs)
 Plug 'airblade/vim-gitgutter' " Git diff in gutter
 Plug 'rust-lang/rust.vim'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Vim color schemes
 Plug 'morhetz/gruvbox'
@@ -135,3 +136,6 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Tagbar key
 nmap <F7> :TagbarToggle<CR>
+
+" Run rustfmt on save
+let g:rustfmt_autosave = 1

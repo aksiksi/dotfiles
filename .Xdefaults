@@ -1,0 +1,74 @@
+# We use .Xdefaults b/c xrvt loads it everytime
+# With .Xresources, need to run a command on config update
+
+# Extensions enabled
+# resize-font is an external extension
+URxvt.perl-ext-common: default,matcher,selection-to-clipboard,resize-font
+
+# Font
+URxvt.font: xft:FiraMono for Powerline:size=12
+URxvt.letterSpace: -1
+
+# do not scroll with output
+URxvt.scrollTtyOutput: false
+
+# scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt.scrollWithBuffer: true
+
+# scroll back to the bottom on keypress
+URxvt.scrollTtyKeypress: true
+
+URxvt.scrollBar: false
+
+# Copy and paste keybindings (uses a Perl extension)
+# NOTE: SYSTEM is for X, clipboard is for everyone else
+# Use middle-mouse for paste from SYSTEM, Alt+Middle for clip.
+
+# Anything copied to PRIMARY (X) is also copied to clipboard
+URxvt.clipboard.autocopy: true
+
+# Disable Ctrl+Shift hijacking
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+# Shortcuts for copy/paste from clipboard
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+# Clickable URLs
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+
+# Color scheme?
+*background: #0f0f0f
+*foreground: #c8c8c8
+
+! black
+*color0:  #2E3436
+*color8:  #555753
+! red
+*color1:  #a40000
+*color9:  #EF2929
+! green
+*color2:  #4E9A06
+*color10: #8AE234
+! yellow
+*color3:  #C4A000
+*color11: #FCE94F
+! blue
+*color4:  #3465A4
+*color12: #729FCF
+! purple
+*color5:  #75507B
+*color13: #AD7FA8
+! orange (replaces cyan)
+*color6:  #ce5c00
+*color14: #fcaf3e
+! white
+*color7:  #babdb9
+*color15: #EEEEEC
+
+# Transparency ("fake")
+# See: https://wiki.archlinux.org/index.php/Rxvt-unicode/Tips_and_tricks#Transparency
+urxvt*transparent: true
+urxvt*shading: 30

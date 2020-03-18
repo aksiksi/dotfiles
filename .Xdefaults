@@ -6,18 +6,14 @@
 URxvt.perl-ext-common: default,matcher,selection-to-clipboard,resize-font
 
 # Font
-URxvt.font: xft:FiraMono for Powerline:size=12
+# FiraCode: https://github.com/tonsky/FiraCode
+URxvt.font: xft:FiraCode:size=12,xft:Monospace:size=15
 URxvt.letterSpace: -1
 
-# do not scroll with output
+# Scrolling
 URxvt.scrollTtyOutput: false
-
-# scroll in relation to buffer (with mouse scroll or Shift+Page Up)
 URxvt.scrollWithBuffer: true
-
-# scroll back to the bottom on keypress
 URxvt.scrollTtyKeypress: true
-
 URxvt.scrollBar: false
 
 # Copy and paste keybindings (uses a Perl extension)
@@ -72,3 +68,10 @@ URxvt.matcher.button: 1
 # See: https://wiki.archlinux.org/index.php/Rxvt-unicode/Tips_and_tricks#Transparency
 urxvt*transparent: true
 urxvt*shading: 30
+
+# Font size key bindings (extension: resize-font)
+# See: https://wiki.archlinux.org/index.php/Rxvt-unicode#Changing_font_size_on_the_fly
+URxvt.keysym.C-minus: resize-font:smaller
+URxvt.keysym.C-equal: resize-font:bigger
+URxvt.keysym.C-0: resize-font:reset
+URxvt.keysym.C-question: resize-font:show

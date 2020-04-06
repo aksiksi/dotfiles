@@ -7,7 +7,10 @@ URxvt.perl-ext-common: default,matcher,selection-to-clipboard,resize-font
 
 # Font
 # FiraCode: https://github.com/tonsky/FiraCode
-URxvt.font: xft:FiraCode:size=12,xft:Monospace:size=15
+URxvt.font: xft:FiraCode:size=12:Regular,xft:Monospace:size=15
+URxvt.boldFont: xft:FiraCode:size=12:Bold
+URxvt.italicFont: xft:FiraCode:size=12:Italic
+URxvt.boldItalicFont: xft:FiraCode:size=12:Bold:Italic
 URxvt.letterSpace: -1
 
 # Scrolling

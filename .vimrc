@@ -17,7 +17,7 @@ call plug#begin('~/.vim/plugged')
 
 " Plugins
 Plug 'godlygeek/tabular'
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 " Plug 'jeffkreeftmeijer/vim-numbertoggle' " Toggles relative numbering in insert mode
 Plug 'tpope/vim-fugitive'
 Plug 'ntpeters/vim-better-whitespace' " Highlight trailing spaces
@@ -27,7 +27,11 @@ Plug 'tpope/vim-commentary' " Commenting (binding: gcc)
 Plug 'tpope/vim-surround' " Surround (binding: gs)
 Plug 'airblade/vim-gitgutter' " Git diff in gutter
 Plug 'rust-lang/rust.vim'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'mattn/emmet-vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Vim color schemes
 Plug 'morhetz/gruvbox'
@@ -49,6 +53,7 @@ set wildmenu
 set wildmode=longest:full,full
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/* " Ignore VCS directories
 set showcmd
+set mouse=a
 
 " Color scheme
 let g:gruvbox_contrast_dark='hard'
@@ -82,6 +87,8 @@ endif
 
 " Language indent options
 autocmd FileType javascript,html,css,yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd Filetype json setlocal ts=2 sts=2 sw=2 expandtab
+autocmd Filetype *.tf setlocal ts=2 sts=2 sw=2 expandtab
 
 " Jenkinsfile detection
 autocmd BufRead,BufNewFile Jenkinsfile set syntax=groovy
@@ -139,3 +146,26 @@ nmap <F7> :TagbarToggle<CR>
 
 " Run rustfmt on save
 let g:rustfmt_autosave = 1
+
+" fzf
+let g:fzf_layout = { 'down': '~20%' }
+nnoremap <c-p> :Files<cr>
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Enable Emmet only in HTML and CSS files
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall

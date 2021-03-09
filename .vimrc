@@ -73,7 +73,7 @@ if has("gui_running")
     set guifont=Fira\ Mono\ for\ Powerline\ 12,DejaVu\ Sans\ Mono\ 11
   elseif has("gui_macvim")
     " MacVim
-    set guifont=Fira\ Mono\ for\ Powerline\ 12,Menlo\ Regular:h12
+    set guifont=Fira\ Mono\ for\ Powerline:h14,Menlo\ Regular:h12
   elseif has("gui_win32")
     " Win32/64 GVim
   endif
